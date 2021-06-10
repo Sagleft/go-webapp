@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 type router struct {
 	Gin         *gin.Engine
@@ -8,6 +12,25 @@ type router struct {
 }
 
 func (r *router) setupRoutes() error {
-	// TODO
+	r.loadTemplates("./templates/*")
+	r.Gin.Static("/assets", "./assets")
+
+	r.Gin.GET("/", func(c *gin.Context) {
+		r.renderTemplate(
+			c,
+			http.StatusOK,
+			"home.html",
+			gin.H{},
+		)
+	})
+
 	return nil
+}
+
+func (r *router) loadTemplates(pattern string) {
+	r.Gin.LoadHTMLGlob(pattern)
+}
+
+func (r *router) renderTemplate(c *gin.Context, code int, name string, obj interface{}) {
+	c.HTML(code, name, obj)
 }

@@ -3,9 +3,9 @@ package main
 import "log"
 
 func main() {
-	app, err := newSolution()
+	app := newSolution()
+	err := app.run()
 	if err != nil {
 		log.Fatalln(err)
 	}
-	app.run()
 }

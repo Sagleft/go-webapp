@@ -1,22 +1,23 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 type solution struct {
 	Connections solConnections
 }
 
-func newSolution() (*solution, error) {
-	sol := solution{}
-	err := sol.setupRouter()
-	if err != nil {
-		return nil, err
-	}
-	return &sol, nil
+func newSolution() *solution {
+	return &solution{}
 }
 
-func (sol *solution) run() {
-	//
+func (sol *solution) run() error {
+	err := sol.setupRouter()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (sol *solution) setupRouter() error {
@@ -28,5 +29,5 @@ func (sol *solution) setupRouter() error {
 	if err != nil {
 		return err
 	}
-	return nil
+	return router.Gin.Run()
 }
