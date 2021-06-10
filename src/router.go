@@ -23,6 +23,14 @@ func (r *router) setupRoutes() error {
 			gin.H{},
 		)
 	})
+	r.Gin.NoRoute(func(c *gin.Context) {
+		r.renderTemplate(
+			c,
+			http.StatusNotFound,
+			"404.html",
+			gin.H{},
+		)
+	})
 
 	return nil
 }
