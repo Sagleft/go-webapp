@@ -1,9 +1,7 @@
 # go-webapp
 Awesome web project template written in Go
 
-```go
-// TODO: add screenshot
-```
+![image](screen.png)
 
 ---
 
